@@ -1,0 +1,32 @@
+{
+  "name": "mamma-mia",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:api": "node server/index.js",
+    "dev:full": "concurrently \"npm run dev:api\" \"npm run dev\"",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start:api": "node server/index.js",
+    "db:setup": "mysql -u root -p < database/mysql-schema.sql"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.468.0",
+    "mysql2": "^3.11.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "vite": "^6.0.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.0",
+    "eslint": "^9.17.0"
+  }
+}
