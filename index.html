@@ -5,12 +5,194 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Mamma Mia Pizzaria: cardápio online, pedidos e painel administrativo."
+      content="Mamma Mia Pizzaria - cardapio online com carrinho e checkout."
     />
     <title>Mamma Mia Pizzaria</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <header class="topbar">
+      <button class="brand" data-page="menu" aria-label="Ir para o cardapio">
+        <span class="brand-icon">🍕</span>
+        <span>
+          <strong>Mamma Mia</strong>
+          <small>Pizzaria artesanal</small>
+        </span>
+      </button>
+
+      <nav class="nav" aria-label="Navegacao principal">
+        <button class="nav-link active" data-page="menu">Cardapio</button>
+        <button class="nav-link" data-page="orders">Meus pedidos</button>
+        <button class="nav-link" data-page="about">Sobre</button>
+      </nav>
+
+      <button class="cart-button" data-page="cart" aria-label="Abrir carrinho">
+        <span>🛍️</span>
+        <strong id="cartCount">0</strong>
+      </button>
+    </header>
+
+    <main>
+      <section class="page page-active" id="menuPage">
+        <section class="hero">
+          <div class="hero-copy">
+            <span class="eyebrow">Aberto hoje ate 23h</span>
+            <h1>Mamma Mia</h1>
+            <p>
+              Pizzas artesanais, massa de longa fermentacao e ingredientes
+              selecionados para pedir online sem complicacao.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#cardapio">Ver cardapio</a>
+              <button class="button button-light" data-page="cart">
+                Finalizar pedido
+              </button>
+            </div>
+            <div class="hero-badges">
+              <span>Massa artesanal</span>
+              <span>Entrega propria</span>
+              <span>35-45 min</span>
+            </div>
+          </div>
+
+          <aside class="hero-card">
+            <div class="spotlight">
+              <span>Especial de hoje</span>
+              <strong>Mamma Mia Especial</strong>
+              <small>Pepperoni, bacon, cebola caramelizada e molho defumado.</small>
+            </div>
+            <div class="hero-stat">
+              <span>Avaliacao</span>
+              <strong>4.9/5</strong>
+            </div>
+            <div class="hero-stat">
+              <span>Entrega</span>
+              <strong>R$ 8,90</strong>
+            </div>
+          </aside>
+        </section>
+
+        <section class="menu-section" id="cardapio">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">Cardapio</span>
+              <h2>Escolha seu pedido</h2>
+            </div>
+            <label class="search">
+              <span>⌕</span>
+              <input id="searchInput" type="search" placeholder="Buscar sabor" />
+            </label>
+          </div>
+
+          <div class="category-tabs" id="categoryTabs"></div>
+          <div class="product-grid" id="productGrid"></div>
+        </section>
+      </section>
+
+      <section class="page" id="cartPage">
+        <div class="checkout-layout">
+          <section class="panel">
+            <div class="section-heading compact">
+              <div>
+                <span class="eyebrow">Carrinho</span>
+                <h2>Seu pedido</h2>
+              </div>
+            </div>
+            <div class="cart-list" id="cartList"></div>
+            <div class="summary">
+              <div>
+                <span>Subtotal</span>
+                <strong id="subtotalValue">R$ 0,00</strong>
+              </div>
+              <div>
+                <span>Entrega</span>
+                <strong id="deliveryValue">R$ 0,00</strong>
+              </div>
+              <div class="summary-total">
+                <span>Total</span>
+                <strong id="totalValue">R$ 0,00</strong>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="section-heading compact">
+              <div>
+                <span class="eyebrow">Checkout</span>
+                <h2>Entrega</h2>
+              </div>
+            </div>
+            <form class="checkout-form" id="checkoutForm">
+              <label>
+                Nome
+                <input name="name" required placeholder="Seu nome completo" />
+              </label>
+              <label>
+                Telefone
+                <input name="phone" required placeholder="(00) 00000-0000" />
+              </label>
+              <label>
+                Endereco
+                <input name="address" required placeholder="Rua, numero, bairro" />
+              </label>
+              <label>
+                Pagamento
+                <select name="payment">
+                  <option>Pix</option>
+                  <option>Cartao na entrega</option>
+                  <option>Dinheiro</option>
+                </select>
+              </label>
+              <label>
+                Observacoes
+                <textarea name="notes" placeholder="Ex: sem cebola, troco, ponto de referencia"></textarea>
+              </label>
+              <button class="button button-primary full" type="submit">
+                Confirmar pedido
+              </button>
+            </form>
+          </section>
+        </div>
+      </section>
+
+      <section class="page" id="ordersPage">
+        <section class="content">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">Historico</span>
+              <h2>Meus pedidos</h2>
+            </div>
+          </div>
+          <div class="orders-list" id="ordersList"></div>
+        </section>
+      </section>
+
+      <section class="page" id="aboutPage">
+        <section class="about">
+          <div>
+            <span class="eyebrow">Nossa cozinha</span>
+            <h2>Pizza com tempo, fogo e ingrediente bom.</h2>
+            <p>
+              A Mamma Mia nasceu para simplificar o pedido sem perder o clima de
+              pizzaria artesanal: massa fermentada, molho da casa e sabores para
+              dividir na mesa.
+            </p>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1548369937-47519962c11a?auto=format&fit=crop&w=1100&q=85"
+            alt="Pizza artesanal saindo do forno"
+          />
+        </section>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <footer class="footer">
+      <span>Mamma Mia Pizzaria</span>
+      <span>Cardapio online artesanal</span>
+    </footer>
+
+    <script src="app.js"></script>
   </body>
 </html>
